@@ -16,7 +16,7 @@ class Registration extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Second Name:</label>
+            <label htmlFor="lastName">Second Name:</label>
             <input
               className="form-control"
               id="lastName"
@@ -41,11 +41,11 @@ class Registration extends Component {
               id="pwd"
               placeholder="Enter password"
             />
-            password must be Alphanumeric - Minimum 8 Characters, Contains 1
-            Number & Contains 1 Capital letter
+            <sub>Password must be Alphanumeric - Minimum 8 Characters, Contains 1
+            Number and Contains 1 Capital letter</sub>
           </div>
           <div className="form-group">
-            <label htmlFor="pwd">Confirm Password:</label>
+            <label htmlFor="cnfpwd">Confirm Password:</label>
             <input
               className="form-control"
               type="password"
@@ -53,7 +53,7 @@ class Registration extends Component {
               placeholder="Please re enter your password"
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" onClick={this.props.onSubmit.bind(this)} className="btn btn-primary">
             Register
           </button>
         </form>
