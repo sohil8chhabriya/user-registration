@@ -9,7 +9,7 @@ class Registration extends Component {
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
             <input
-              className="form-control"
+              className="form-control error"
               id="firstName"
               type="text"
               placeholder="Enter First Name"
@@ -19,7 +19,7 @@ class Registration extends Component {
           <div className="form-group">
             <label htmlFor="lastName">Second Name:</label>
             <input
-              className="form-control"
+              className="form-control error"
               id="lastName"
               type="text"
               placeholder="Enter surname"
@@ -29,7 +29,7 @@ class Registration extends Component {
           <div className="form-group">
             <label htmlFor="email">Email address:</label>
             <input
-              className="form-control"
+              className="form-control error"
               type="email"
               id="email"
               placeholder="Enter email"
@@ -39,7 +39,7 @@ class Registration extends Component {
           <div className="form-group">
             <label htmlFor="pwd">Password:</label>
             <input
-              className="form-control"
+              className="form-control error"
               type="password"
               id="pwd"
               placeholder="Enter password"
@@ -51,7 +51,7 @@ class Registration extends Component {
           <div className="form-group">
             <label htmlFor="cnfpwd">Confirm Password:</label>
             <input
-              className="form-control"
+              className="form-control error"
               type="password"
               id="cnfpwd"
               placeholder="Please re enter your password"
