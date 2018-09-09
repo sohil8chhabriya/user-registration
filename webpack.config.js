@@ -17,11 +17,19 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
 	      include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: { presets: [ 'es2015', 'react' ] },
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
       },
       {
         test: /\.css$/,
@@ -42,6 +50,9 @@ const config = {
         ]
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   plugins: [htmlPlugin]
 };

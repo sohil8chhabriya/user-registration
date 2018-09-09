@@ -5,7 +5,7 @@ class Registration extends Component {
     return (
       <div className="container">
         <h1>Signup</h1>
-        <form>
+        <form onSubmit={(e) => this.props.clickRegister(e)}>
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
             <input
@@ -13,6 +13,7 @@ class Registration extends Component {
               id="firstName"
               type="text"
               placeholder="Enter First Name"
+              onChange={(e) => this.props.handleValidate(e)}
             />
           </div>
           <div className="form-group">
@@ -22,6 +23,7 @@ class Registration extends Component {
               id="lastName"
               type="text"
               placeholder="Enter surname"
+              onChange={(e) => this.props.handleValidate(e)}
             />
           </div>
           <div className="form-group">
@@ -31,6 +33,7 @@ class Registration extends Component {
               type="email"
               id="email"
               placeholder="Enter email"
+              onChange={(e) => this.props.handleValidate(e)}
             />
           </div>
           <div className="form-group">
@@ -40,6 +43,7 @@ class Registration extends Component {
               type="password"
               id="pwd"
               placeholder="Enter password"
+              onChange={(e) => this.props.handleValidate(e)}
             />
             <sub>Password must be Alphanumeric - Minimum 8 Characters, Contains 1
             Number and Contains 1 Capital letter</sub>
@@ -51,9 +55,10 @@ class Registration extends Component {
               type="password"
               id="cnfpwd"
               placeholder="Please re enter your password"
+              onChange={(e) => this.props.handleValidate(e)}
             />
           </div>
-          <button type="submit" onClick={this.props.onSubmit.bind(this)} className="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Register
           </button>
         </form>
