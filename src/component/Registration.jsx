@@ -7,23 +7,26 @@ class Registration extends Component {
         <h1>Signup</h1>
         <form onSubmit={(e) => this.props.clickRegister(e)}>
           <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
+            <label htmlFor="first_name">First Name:</label>
+            <input type="hidden" id="username" name="username" />
             <input
               className="form-control error"
-              id="firstName"
+              id="first_name"
+              name="first_name"
               type="text"
               placeholder="Enter First Name"
-              onChange={(e) => this.props.handleValidate(e)}
+              required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="lastName">Second Name:</label>
+            <label htmlFor="last_name">Second Name:</label>
             <input
               className="form-control error"
-              id="lastName"
+              id="last_name"
+              name="last_name"
               type="text"
               placeholder="Enter surname"
-              onChange={(e) => this.props.handleValidate(e)}
+              required
             />
           </div>
           <div className="form-group">
@@ -32,30 +35,33 @@ class Registration extends Component {
               className="form-control error"
               type="email"
               id="email"
+              name="email"
               placeholder="Enter email"
-              onChange={(e) => this.props.handleValidate(e)}
+              required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="pwd">Password:</label>
+            <label htmlFor="password1">Password:</label>
             <input
               className="form-control error"
               type="password"
-              id="pwd"
+              id="password1"
+              name="password1"
               placeholder="Enter password"
-              onChange={(e) => this.props.handleValidate(e)}
+              required
             />
             <sub>Password must be Alphanumeric - Minimum 8 Characters, Contains 1
             Number and Contains 1 Capital letter</sub>
           </div>
           <div className="form-group">
-            <label htmlFor="cnfpwd">Confirm Password:</label>
+            <label htmlFor="password2">Confirm Password:</label>
             <input
               className="form-control error"
               type="password"
-              id="cnfpwd"
+              id="password2"
+              name="password2"
               placeholder="Please re enter your password"
-              onChange={(e) => this.props.handleValidate(e)}
+              required
             />
           </div>
           <button type="submit" className="btn btn-primary">

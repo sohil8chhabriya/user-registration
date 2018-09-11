@@ -14,6 +14,11 @@ const config = {
     path: path.resolve('dist'),
     filename: 'bundled.js'
   },
+  devServer: {
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
+  },
   module: {
     rules: [
       {
@@ -21,7 +26,7 @@ const config = {
 	      include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: { presets: [ 'es2015', 'react' ] },
+        query: { presets: [ 'env', 'react' ] },
       },
       {
         test: /\.html$/,
