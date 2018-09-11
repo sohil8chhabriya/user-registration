@@ -35,6 +35,7 @@ class UserList extends Component {
         return (
             <div>
                 <h1><center>Registered User List</center></h1>
+                <button onClick={this.props.switchRegister}>Register New</button>
                 <br />
                 <div className="container">
                     <div className="table-responsive">

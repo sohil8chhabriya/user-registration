@@ -37,7 +37,7 @@ class App extends Component {
           'registeredSuccess': true,
           'regResp': JSON.stringify(data)})
         console.error(JSON.stringify(data))
-      })
+      });
     }
   }
 
@@ -83,9 +83,13 @@ class App extends Component {
     return regularExpression.test(password);
   }
 
+  switchRegister () {
+    this.setState({'registeredSuccess':false});
+  }
+
   render() {
     const { formErrorMsg, registeredSuccess } = this.state;
-    const registration = !registeredSuccess ? <Registration handleValidate={(e) => this.handleValidate(e)} clickRegister={(e) => this.clickRegister(e)} /> : <UserList />;
+    const registration = !registeredSuccess ? <Registration handleValidate={(e) => this.handleValidate(e)} clickRegister={(e) => this.clickRegister(e)} /> : <UserList switchRegister={this.switchRegister} />;
     return (
       <div className="App">
         { registration }
