@@ -8,7 +8,7 @@ class Registration extends Component {
         <form onSubmit={(e) => this.props.clickRegister(e)}>
           <div className="form-group">
             <label htmlFor="first_name">First Name:</label>
-            <input type="hidden" id="username" name="username" />
+            {/*<input type="hidden" id="username" name="username" />*/}
             <input
               className="form-control error"
               id="first_name"
@@ -37,6 +37,32 @@ class Registration extends Component {
               id="email"
               name="email"
               placeholder="Enter email"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Phone Number:</label>
+            <input
+              className="form-control error"
+              type="tel"
+              id="phone"
+              name="phone"
+              maxLength={10}
+              minLength={10}
+              placeholder="Please enter your phone number"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Age:</label>
+            <input
+              className="form-control error"
+              type="number"
+              id="age"
+              name="age"
+              maxLength={1}
+              minLength={0}
+              placeholder="Please enter your age"
               required
             />
           </div>
