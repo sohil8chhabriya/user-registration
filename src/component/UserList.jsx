@@ -21,7 +21,7 @@ class UserList extends Component {
             },
             (error) => {
                 this.setState({
-                    hasError: true,
+                    isSuccess: false
                 });
             }
         )
@@ -31,11 +31,10 @@ class UserList extends Component {
         const { userList, hasError, isSuccess } = this.state;
         //const callStatus = hasError ? "Call Has error" : "Api call Success";
         const callStatus = !isSuccess ? "Call Has error" : "Api call Success";
-        let i = 0;
         return (
             <div>
                 <h1><center>Registered User List</center></h1>
-                <button onClick={this.props.switchRegister}>Register New</button>
+                <button onClick={(e) => this.props.switchRegister(e)}>Register New</button>
                 <br />
                 <div className="container">
                     <div className="table-responsive">
@@ -46,6 +45,8 @@ class UserList extends Component {
                                 <th>Firstname</th>
                                 <th>Lastname</th>
                                 <th>Email</th>
+                                <th>Phone</th>
+                                <th>Age</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +56,8 @@ class UserList extends Component {
                                     <td>{user.first_name}</td>
                                     <td>{user.last_name}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.phone}</td>
+                                    <td>{user.age}</td>
                                 </tr>
                             ))}
                         </tbody>
