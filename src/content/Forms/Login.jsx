@@ -13,6 +13,9 @@ class Login extends Component {
               type="email"
               id="email"
               placeholder="Enter email"
+              autoComplete="off"
+              autofocus
+              required
             />
           </div>
           <div className="form-group">

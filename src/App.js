@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import Registration from "./component/Registration.jsx";
-import Login from "./component/Login.jsx";
-import UserList from "./component/UserList.jsx"
+import Registration from "./content/Forms/Registration.jsx";
+import UserList from "./content/AdminPages/UserList.jsx"
+import TopNav from "./content/TopNav"
+import RenderBody from "./content/RenderBody"
+import Footer from "./content/Footer"
 import "babel-polyfill"
 import "regenerator-runtime/runtime";
-
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +30,7 @@ class App extends Component {
     console.log(data.get('password1'));
     console.log(data.get('password2'));
     //let localResponse = {}
-
     this.handleRegistrationValidation(data)
-  
   }
 
   async componentDidUpdate() {
@@ -38,8 +38,6 @@ class App extends Component {
     if( validForm!==true || registeredSuccess===true) {
       console.log("form is not valid or regSuccess" + validForm + " - " + registeredSuccess)
       return;
-    } else {
-      console.log("form is valid")
     }
     const config = {
       method: "POST",
@@ -54,18 +52,10 @@ class App extends Component {
       referrer: "no-referrer",
       body: formData,
     }
-    let response = {};
+
     let localResponse = {};
-    try {
-      response = await fetch(`http://localhost:8000/api/v1/users/`, config)
-      localResponse = await JSON.stringify(response);
-      this.setState({
-        'registeredSuccess': true,
-        'regResp': JSON.stringify(localResponse)
-      });
-      console.log(JSON.stringify(response.email))
-    }
-      /*.then((response) => {
+    await fetch(`http://localhost:8000/api/v1/users/`, config)
+    .then((response) => {
         localResponse = response
         this.setState({
           'registeredSuccess': true,
@@ -73,22 +63,16 @@ class App extends Component {
         });
         console.log(JSON.stringify(response.email))
       })
-      .catch((response) => {
-        localResponse = response
+    .catch((response) => {
+      localResponse = response
         this.setState({
           'registeredSuccess': false,
           'regResp': JSON.stringify(response)
         });
         console.error(JSON.stringify(response))
-      });*/
-      catch (error) {
-        this.setState({
-          'registeredSuccess': false,
-          'regResp': JSON.stringify(response)
-        });
         console.log("catchError"+error);
+      });
         console.log(JSON.stringify(response))
-      }
         console.log("localRep:" + localResponse.email);
     }
 
@@ -135,9 +119,13 @@ class App extends Component {
     const responseClass = !registeredSuccess && !validForm ? 'text-danger' : ''
     return (
       <div className="App">
-        <p className={responseClass}>{regResp.email}</p>
-        { registration }
-        <p className="text-danger">{formErrorMsg}</p>
+        <Router>
+          <div>
+            <TopNav />
+            <RenderBody />
+            <Footer />
+          </div>
+        </Router>
       </div>
     );
   }
