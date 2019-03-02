@@ -14,7 +14,7 @@ class Login extends Component {
               id="email"
               placeholder="Enter email"
               autoComplete="off"
-              autofocus
+              autoFocus
               required
             />
           </div>
@@ -25,6 +25,8 @@ class Login extends Component {
               type="password"
               id="pwd"
               placeholder="Enter password"
+              autoComplete="off"
+              required
             />
           </div>
           <button type="submit" className="btn btn-primary">

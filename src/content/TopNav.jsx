@@ -30,10 +30,7 @@ return (
             Policies
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <span className="dropdown-item"><Link to="/medicalInsurance">Medical Insurance</Link></span>
             <span className="dropdown-item"><Link to="/termInsurance">Term Plan</Link></span>
-            <div className="dropdown-divider"></div>
-            <span className="dropdown-item"><Link to="/vehicleInsurance">Vehicle Insurance</Link></span>
           </div>
         </li>
 
@@ -44,12 +41,8 @@ return (
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <span className="dropdown-item"><Link to="/userList">See User List</Link></span>
-            <span className="dropdown-item"><Link to="/newPolicyRequest">See New Policy Request</Link></span>
+            <span className="dropdown-item"><Link to="/newPolicyRequest">New Policy Application</Link></span>
             <span className="dropdown-item"><Link to="/claimRequest">See Claim Requests</Link></span>
-            <div className="dropdown-divider"></div>
-            <span className="dropdown-item"><Link to="/addNewPolicy">Add New Policy</Link></span>
-            <span className="dropdown-item"><Link to="/modifyPolicy">Modify old policies</Link></span>
-            
           </div>
         </li>
 

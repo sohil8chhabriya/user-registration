@@ -22,9 +22,7 @@ return (
         <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
         <ul className="list-unstyled">
-          <li>
-            <Link to="/medicalInsurance">Medical Insurance</Link>
-          </li>
+
         </ul>
 
       </div>
@@ -36,9 +34,6 @@ return (
         <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
         <ul className="list-unstyled">
-          <li>
-            <Link to="/vehicleInsurance">Vehicle Insurance</Link>
-          </li>
         </ul>
 
       </div>

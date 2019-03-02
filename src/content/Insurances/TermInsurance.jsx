@@ -1,79 +1,106 @@
 import React, { Component } from "react";
-//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import BasicDetailForm from "../Forms/BasicDetailForm"
+import PayPremium from "../Forms/PayPremium"
+import "babel-polyfill"
+import "regenerator-runtime/runtime";
 
 class TermInsurance extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      baseFormSubmit: false,
+      premium: "",
+      validForm: false,
+      formErrorMsg: '',
+      formData:{},
+      savedUserId: "", 
+      generatedPolicyId: ""
+    }
+  }
+
+  resetState () {
+    this.setState({baseFormSubmit: false, premium: "", validForm: false, formData:{}});
+  }
+
+  handleSubmitValidation (data) {
+    /*let isValidForm = false,
+        formErrorMsg = '';
+    const pwd1 = data.get('password1'),
+          pwd2 = data.get('password2');
+    isValidForm = this.validatePassword(pwd1);
+    formErrorMsg = !isValidForm ? 'password is invalid':'';
+    
+    isValidForm = this.validatePhone(data.get('phone'));
+    formErrorMsg = !isValidForm ? 'invalid phone number':'';
+    //confirmed password check
+    isValidForm = (pwd1!=="" && pwd2!=="" && pwd1===pwd2);
+    formErrorMsg = !isValidForm ? 'password is invalid':'';
+    console.log("Form Validation complete isValid: " + isValidForm);
+    this.setState({
+      "validForm": isValidForm,
+      "formErrorMsg": formErrorMsg,
+      "formData":data
+    });
+    */
+    this.setState({
+      "validForm": true,
+      "formErrorMsg": "",
+      "formData":data
+    });
+}
+
+validatePassword (password) {
+    const regularExpression = /^(?=.*[0-9])(?=.*[A-Z]).{8,}$/;
+    console.log(regularExpression.test(password));
+    return regularExpression.test(password);
+}
+
+validatePhone (phone) {
+    const regularExpression = /^(?=.*[0-9]).{10,10}$/;
+    console.log(regularExpression.test(phone));
+    return regularExpression.test(phone);
+}
+
+async componentDidUpdate() {
+    const { validForm, formData } = this.state;
+    var object = {};
+    formData.forEach(function(value, key){
+        object[key] = value;
+    });
+    var jsonData = JSON.stringify(object);
+
+    if( !validForm || this.state.baseFormSubmit) {
+        console.log("form is not valid or submitted successfully" + validForm);
+        return;
+    }
+    const config = {
+      method: "POST",
+      credentials: "omit",
+      headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+      },
+      body: jsonData
+    }
+    await fetch(`http://localhost:8080/users/`, config)
+    .then(response => response.json())
+    .then(data => this.setState({ savedUserId: data.userId, generatedPolicyId: data.policyId, premium: data.premium, baseFormSubmit: true }))
+    .catch(data => this.setState({ premium: 0, baseFormSubmits: false }));
+}
+
   render() {
+    const { baseFormSubmit, premium, savedUserId, generatedPolicyId  } = this.state;
+    const BasicFormView = !baseFormSubmit ? <BasicDetailForm handleSubmitValidation={(data) => this.handleSubmitValidation(data)} /> : <PayPremium premium={premium} userId={savedUserId} policyId={generatedPolicyId} />;
     return (
-      <div className="container">
-        <center><h1>Term Insurance</h1></center>
-        <p>Instructions for filling up the form</p>
-
-<h2> personl details</h2>
-
-<form>
-  <div className="form-group"><label htmlFor="name">Name</label>
-    <input id="name" name="name" type="text" className="form-control error"></input></div>
-  <div className="form-group"><label htmlFor="phone">Phone Number</label>
-    <input id="phone" name="phone" type="text" className="form-control error"></input></div>
-
-  <div className="form-group"><label htmlFor="email">Email</label>
-    <input id="email" name="email" type="text" className="form-control error"></input></div>
-
-  <div className="form-group"><label htmlFor="age">Age</label>
-    <input id="age" name="age" type="text" className="form-control error"></input></div>
-
-  <div className="form-group"><label htmlFor="gender">Gender</label>
-    <input type="radio" name="gender" id="male" />Male
-    <input type="radio" name="gender" id="female" />Female
-    <input type="radio" name="gender" id="other" />Other
+    <div className="container">
+      <center>
+        <h1>Term Insurance</h1>
+      </center>
+      { BasicFormView }
+      {/*<MedicalInsuranceMoreForms />*/}
+      <center><input type="button" value="Reset" onClick={(e) => this.resetState(e)} className="btn btn-primary text-center"></input></center>
     </div>
-    <div className="form-group"><label htmlFor="dob">date of birth</label>
-      <input id="dob" name="dob" type="text" className="form-control error"></input></div>
-
-    <div className="form-group"><label htmlFor="pan">PAN NO</label>
-      <input id="pan" name="pan" type="text" className="form-control error"></input></div>
-
-</form>
-<h2>educational qualification:</h2>
-  <form>
-    <div className="form-group"><label htmlFor="Matriculate">Matriculate</label>
-      <input type="checkbox" name="Matriculate" value="Matriculate"></input></div>
-
-    <div className="form-group"><label htmlFor="Under Graduate">Under Graduate</label>
-      <input type="checkbox" name="Under Graduate" value="Under Graduate"></input></div>
-
-    <div className="form-group"><label htmlFor="Graduate">Graduate</label>
-      <input type="checkbox" name="Graduate" value="Graduate"></input></div>
-
-    <div className="form-group"><label htmlFor="Post Graduate">Post Graduate</label>
-      <input type="checkbox" name="Post Graduate" value="Post Graduate"></input></div>
-
-    <div className="form-group"><label htmlFor="Professionally Qualified">Professionally Qualified</label>
-      <input type="checkbox" name="Professionally Qualified" value="Professionally Qualified"></input></div>
-  </form>
-  <h2>Family Monthly Income:</h2>
-  <form>
-    <div className="form-group"><label htmlFor="Up to 20,000">Up to 20,000</label>
-      <input type="checkbox" name="Up to 20,000" value="Up to 20,000"></input></div>
-
-    <div className="form-group"><label htmlFor="20,001 to 50,000">20,001 to 50,000</label>
-      <input type="checkbox" name="20,001 to 50,000" value="20,001 to 50,000"></input></div>
-
-    <div className="form-group"><label htmlFor="50,001 to 1 lakh">50,001 to 1 lakh</label>
-      <input type="checkbox" name="50,001 to 1 lakh" value="50,001 to 1 lakh"></input></div>
-
-    <div className="form-group"><label htmlFor="Above 1 lakh">Above 1 lakh</label>
-      <input type="checkbox" name="Above 1 lakh" value="Above 1 lakh"></input></div>
-  </form>
-  <h2>financier details</h2>
-  <form>
-    <div className="form-group"><label htmlFor="name of Instructions">name of Instructions</label>
-      <input id="name of Instructions" name="name of Instructions" type="text" className="form-control error"></input></div>
-
-    <div className="form-group"><label htmlFor="name of financier adress financier">name of Instructions</label>
-      <input id="name of Instructions" name="name of Instructions" type="text" className="form-control error"></input></div>
-  </form>
-      </div>
     );
   }
 }

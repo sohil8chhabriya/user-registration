@@ -15,7 +15,7 @@ class Registration extends Component {
               name="first_name"
               type="text"
               placeholder="Enter First Name"
-              autofocus
+              autoFocus
               required
             />
           </div>
@@ -39,7 +39,7 @@ class Registration extends Component {
               name="email"
               placeholder="Enter email"
               required
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
